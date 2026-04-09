@@ -1,0 +1,155 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE } from "../consts";
+
+const members = [
+	{
+		name: "Ketan",
+		role: "web",
+		quote: "0xc1ph3rf0x",
+		github: "Ketan-Agarwal",
+		instagram: "ketan__aggarwal"
+	},
+	{
+		name: "Ashish Gautam",
+		role: "pwn · reversing",
+		// quote: "Trust nothing. Verify everything.",
+		// github: "janedoe",
+		// twitter: "janedoe",
+	},
+	{
+		name: "Shivam Sah",
+		role: "forensics",
+		// quote: "Sometimes it's the people no one imagines anything of who do the things that no one can imagine.",
+		github: "shivam-0806",
+	}
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`members | ${SITE_TITLE}`}
+			description="WiredIn team members"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>members</h1>
+			<p class="desc">Current team members.</p>
+
+			<div class="members">
+				{
+					members.map((m) => (
+						<div class="member">
+							<div class="member-top">
+								<span class="name">{m.name}</span>
+								<span class="role">{m.role}</span>
+							</div>
+							<p class="quote">{m.quote}</p>
+							<div class="handles">
+								{m.github && (
+									<a
+										href={`https://github.com/${m.github}`}
+										target="_blank"
+									>
+										gh/{m.github}
+									</a>
+								)}
+								{m.twitter && (
+									<a
+										href={`https://x.com/${m.twitter}`}
+										target="_blank"
+									>
+										@{m.twitter}
+									</a>
+								)}
+								{m.instagram && (
+									<a
+										href={`https://instagram.com/${m.instagram}`}
+										target="_blank"
+									>
+										insta/{m.instagram}
+									</a>
+								)}
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</main>
+		<Footer />
+		<style>
+			main {
+				max-width: 720px;
+				min-height: 50vh;
+			}
+			h1 {
+				margin-bottom: 0.25rem;
+			}
+			.desc {
+				color: var(--fg-muted);
+				font-size: 13px;
+				margin-bottom: 2rem;
+			}
+
+			.members {
+				display: flex;
+				flex-direction: column;
+				gap: 0;
+			}
+			.member {
+				padding: 1rem 0;
+				border-bottom: 1px solid var(--border);
+			}
+			.member:first-child {
+				border-top: 1px solid var(--border);
+			}
+			.member-top {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				margin-bottom: 0.4rem;
+			}
+			.name {
+				font-size: 15px;
+				color: var(--accent);
+				font-weight: 700;
+				letter-spacing: -0.3px;
+			}
+			.role {
+				font-size: 12px;
+				color: var(--fg-dim);
+			}
+			.quote {
+				font-size: 13px;
+				color: var(--fg-muted);
+				font-style: italic;
+				margin: 0 0 0.4rem;
+				line-height: 1.5;
+			}
+			.handles {
+				display: flex;
+				gap: 1rem;
+				font-size: 12px;
+			}
+			.handles a {
+				color: var(--fg-dim);
+			}
+			.handles a:hover {
+				color: var(--accent);
+			}
+
+			@media (max-width: 600px) {
+				.member-top {
+					flex-direction: column;
+					gap: 0.1rem;
+				}
+			}
+		</style>
+	</body>
+</html>

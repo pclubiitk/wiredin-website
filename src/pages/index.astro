@@ -1,0 +1,87 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <section class="hero">
+                <p class="label">infosec @ iitk</p>
+                <h1>WiredIn</h1>
+                <p class="desc">
+                    We are a group of security enthusiasts from IIT Kanpur. We
+                    work on cryptography, binary exploitation, reverse
+                    engineering, forensics, and web security, and compete in
+                    CTFs globally.
+                </p>
+                <nav class="links">
+                    <a href="/blog">writeups →</a>
+                    <a href="/about">about →</a>
+                </nav>
+            </section>
+        </main>
+        <Footer />
+        <style>
+            main {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 1rem;
+            }
+            .hero {
+                min-height: calc(100vh - 200px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .label {
+                font-size: 12px;
+                color: var(--accent);
+                margin-bottom: 0.75rem;
+                letter-spacing: 1px;
+            }
+            h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: var(--fg);
+                margin-bottom: 1.5rem;
+                letter-spacing: -1px;
+            }
+            .desc {
+                color: var(--fg-muted);
+                max-width: 480px;
+                margin-bottom: 2rem;
+                line-height: 1.8;
+                font-size: 14px;
+            }
+            .links {
+                display: flex;
+                gap: 1.5rem;
+            }
+            .links a {
+                font-size: 14px;
+                color: var(--accent);
+            }
+            .links a:hover {
+                opacity: 0.7;
+            }
+
+            @media (max-width: 600px) {
+                h1 {
+                    font-size: 2rem;
+                }
+                .links {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+            }
+        </style>
+    </body>
+</html>

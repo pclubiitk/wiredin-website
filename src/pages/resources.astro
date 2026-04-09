@@ -1,0 +1,165 @@
+---
+import { getCollection } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE } from "../consts";
+
+const resources = (await getCollection("resources")).sort(
+	(a, b) => a.data.order - b.data.order
+);
+
+const categories = [...new Set(resources.map((r) => r.data.category))];
+const grouped = categories.map((cat) => ({
+	name: cat,
+	items: resources.filter((r) => r.data.category === cat),
+}));
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`resources | ${SITE_TITLE}`}
+			description="Learning resources for cybersecurity"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>resources</h1>
+			<p class="desc">
+				Structured knowledge base compiled by the team.
+			</p>
+
+			<!-- <div class="grid">
+				{
+					grouped.map((group) => (
+						<section class="domain-card">
+							<div class="card-header">
+								<h2 class="domain-name">{group.name}</h2>
+							</div>
+							<ul class="guide-list">
+								{group.items.map((item) => (
+									<li>
+										<a href={`/resources/${item.id}/`}>
+											<span class="guide-title">
+												{item.data.title}
+											</span>
+											<span class="arrow">→</span>
+										</a>
+										<p class="guide-desc">
+											{item.data.description}
+										</p>
+									</li>
+								))}
+							</ul>
+						</section>
+					))
+				}
+			</div> -->
+			<section> coming soon </section>
+		</main>
+		<Footer />
+		<style>
+			main {
+				max-width: 720px;
+				min-height: 50vh;
+			}
+			h1 {
+				margin-bottom: 0.25rem;
+			}
+			.desc {
+				color: var(--fg-muted);
+				font-size: 13px;
+				margin-bottom: 2.5rem;
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1rem;
+			}
+
+			.domain-card {
+				background: var(--bg-raised);
+				border: 1px solid var(--border);
+				border-radius: var(--radius);
+				padding: 1.25rem;
+				transition: border-color 0.15s;
+			}
+			.domain-card:hover {
+				border-color: var(--accent);
+			}
+			.card-header {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				margin-bottom: 1rem;
+				padding-bottom: 0.75rem;
+				border-bottom: 1px solid var(--border);
+			}
+			.icon {
+				font-size: 18px;
+				line-height: 1;
+			}
+			.domain-name {
+				font-size: 14px;
+				font-weight: 600;
+				color: var(--accent);
+				text-transform: lowercase;
+				margin: 0;
+				letter-spacing: 0.3px;
+			}
+
+			.guide-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+			}
+			.guide-list li a {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				text-decoration: none;
+				color: var(--fg);
+				font-size: 13px;
+				transition: color 0.15s;
+			}
+			.guide-list li a:hover {
+				opacity: 1;
+			}
+			.guide-list li a:hover .guide-title {
+				color: var(--accent);
+			}
+			.arrow {
+				color: var(--fg-dim);
+				font-size: 12px;
+				transition: color 0.15s, transform 0.15s;
+				flex-shrink: 0;
+			}
+			.guide-list li a:hover .arrow {
+				color: var(--accent);
+				transform: translateX(2px);
+			}
+			.guide-title {
+				transition: color 0.15s;
+			}
+			.guide-desc {
+				font-size: 11px;
+				color: var(--fg-dim);
+				margin: 0.2rem 0 0;
+				line-height: 1.4;
+			}
+
+			@media (max-width: 600px) {
+				.grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</body>
+</html>

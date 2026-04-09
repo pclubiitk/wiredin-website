@@ -1,0 +1,48 @@
+---
+const today = new Date();
+---
+
+<footer>
+    <div class="footer-copy">
+        <span class="prompt">~</span> © {today.getFullYear()} WiredIn | PClub IITK
+    </div>
+    <div class="footer-links">
+        <a href="https://ctftime.org/team/230845" target="_blank">ctftime</a>
+        <!-- <a href="https://github.com/wiredin-iitk" target="_blank">github</a> -->
+        <a href="mailto:wirediniitk@gmail.com">mail</a>
+        <a href="mailto:pclubiitk@gmail.com">pclub</a>
+        <!-- <a href="https://discord.gg/wiredin" target="_blank">discord</a> -->
+    </div>
+</footer>
+
+<style>
+    footer {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2rem 1rem 3rem;
+        font-size: 12px;
+        color: var(--fg-dim);
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+    }
+    .footer-links {
+        display: flex;
+        gap: 1.25rem;
+        margin-bottom: 0.75rem;
+
+    }
+    .footer-links a {
+        color: var(--fg-muted);
+        text-decoration: none;
+        font-size: 12px;
+        transition: color 0.15s;
+    }
+    .footer-links a:hover {
+        color: var(--accent);
+        opacity: 1;
+    }
+    .prompt {
+        color: var(--accent);
+    }
+</style>

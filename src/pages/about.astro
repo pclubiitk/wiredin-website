@@ -1,0 +1,49 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE } from "../consts";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`about | ${SITE_TITLE}`}
+			description="About WiredIn Infosec Team"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>about wiredin</h1>
+			<p>
+				Team <b>WiredIn</b> is the official InfoSec team under the{" "}
+				<a href="https://pclub.in" target="_blank">Programming Club, IIT Kanpur</a>. The team has a
+				diverse group of security enthusiasts passionate about tackling
+				challenges across Cryptography, Binary Exploitation, Reverse
+				Engineering, Forensics, and Web Security.
+			</p>
+			<p>
+				Through our regular meetups, training sessions, and internal
+				CTFs, the knmowledge and skills, which the team members gained, are passed onto junior batches. We
+				consistently rank high globally in competitive Capture The Flag
+				competitions.
+			</p>
+		</main>
+		<Footer />
+		<style>
+			main {
+				max-width: 720px;
+				min-height: 50vh;
+			}
+			h1 {
+				margin-bottom: 1.5rem;
+			}
+			p {
+				color: var(--fg-muted);
+				line-height: 1.8;
+			}
+		</style>
+	</body>
+</html>

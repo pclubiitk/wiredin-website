@@ -1,0 +1,131 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import Header from "../../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`writeups | ${SITE_TITLE}`}
+            description={SITE_DESCRIPTION}
+        />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <h1>writeups</h1>
+            <p class="muted">challenge solutions and ctf walkthroughs.</p>
+
+            <div class="posts">
+                {
+                    posts.map((post) => (
+                        <a href={`/blog/${post.id}/`} class="post">
+                            <div class="post-left">
+                                <span class="post-title">
+                                    {post.data.title}
+                                </span>
+                                {post.data.tags && post.data.tags.length > 0 && (
+                                    <span class="post-tags">
+                                        {post.data.tags.map((tag) => (
+                                            <span class="tag-inline">
+                                                #{tag}
+                                            </span>
+                                        ))}
+                                    </span>
+                                )}
+                            </div>
+                            <span class="post-date">
+                                <FormattedDate date={post.data.pubDate} />
+                            </span>
+                        </a>
+                    ))
+                }
+            </div>
+        </main>
+        <Footer />
+        <style>
+            main {
+                max-width: 720px;
+                min-height: 60vh;
+            }
+            h1 {
+                margin-bottom: 0.25rem;
+            }
+            .muted {
+                color: var(--fg-muted);
+                margin-bottom: 2.5rem;
+                font-size: 13px;
+            }
+
+            .posts {
+                display: flex;
+                flex-direction: column;
+            }
+            .post {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                padding: 0.6rem 0;
+                border-bottom: 1px solid var(--border);
+                text-decoration: none;
+                color: var(--fg);
+                gap: 1rem;
+            }
+            .post:first-child {
+                border-top: 1px solid var(--border);
+            }
+            .post:hover .post-title {
+                color: var(--accent);
+            }
+            .post-left {
+                display: flex;
+                align-items: baseline;
+                gap: 0.75rem;
+                min-width: 0;
+            }
+            .post-title {
+                font-size: 14px;
+                transition: color 0.15s var(--ease);
+                white-space: nowrap;
+            }
+            .post-tags {
+                display: flex;
+                gap: 0.3rem;
+                flex-shrink: 1;
+                overflow: hidden;
+            }
+            .tag-inline {
+                font-size: 11px;
+                color: var(--fg-dim);
+                white-space: nowrap;
+            }
+            .post-date {
+                font-size: 12px;
+                color: var(--fg-dim);
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            @media (max-width: 600px) {
+                .post {
+                    flex-direction: column;
+                    gap: 0.15rem;
+                }
+                .post-left {
+                    flex-direction: column;
+                    gap: 0.2rem;
+                }
+            }
+        </style>
+    </body>
+</html>

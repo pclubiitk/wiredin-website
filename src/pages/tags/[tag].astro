@@ -1,0 +1,124 @@
+---
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+
+export async function getStaticPaths() {
+    const allPosts = await getCollection("blog");
+    const uniqueTags = [
+        ...new Set(allPosts.map((post) => post.data.tags || []).flat()),
+    ];
+
+    return uniqueTags.map((tag) => {
+        const filteredPosts = allPosts.filter((post) =>
+            post.data.tags?.includes(tag)
+        );
+        return {
+            params: { tag },
+            props: { posts: filteredPosts },
+        };
+    });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`#${tag} | ${SITE_TITLE}`}
+            description={SITE_DESCRIPTION}
+        />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <p class="back"><a href="/tags">← tags</a></p>
+            <h1>#{tag}</h1>
+            <p class="count">
+                {posts.length} post{posts.length !== 1 ? "s" : ""}
+            </p>
+
+            <div class="posts">
+                {
+                    posts.map((post) => (
+                        <a href={`/blog/${post.id}/`} class="post">
+                            <span class="post-title">{post.data.title}</span>
+                            <span class="post-date">
+                                <FormattedDate date={post.data.pubDate} />
+                            </span>
+                        </a>
+                    ))
+                }
+            </div>
+        </main>
+        <Footer />
+        <style>
+            main {
+                max-width: 720px;
+                min-height: 50vh;
+            }
+            .back {
+                margin-bottom: 1rem;
+                font-size: 13px;
+            }
+            .back a {
+                color: var(--fg-muted);
+            }
+            .back a:hover {
+                color: var(--accent);
+            }
+            h1 {
+                margin-bottom: 0.25rem;
+            }
+            .count {
+                color: var(--fg-dim);
+                font-size: 12px;
+                margin-bottom: 2rem;
+            }
+
+            .posts {
+                display: flex;
+                flex-direction: column;
+            }
+            .post {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                padding: 0.6rem 0;
+                border-bottom: 1px solid var(--border);
+                text-decoration: none;
+                color: var(--fg);
+                gap: 1rem;
+            }
+            .post:first-child {
+                border-top: 1px solid var(--border);
+            }
+            .post:hover .post-title {
+                color: var(--accent);
+            }
+            .post-title {
+                font-size: 14px;
+                transition: color 0.15s var(--ease);
+            }
+            .post-date {
+                font-size: 12px;
+                color: var(--fg-dim);
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            @media (max-width: 600px) {
+                .post {
+                    flex-direction: column;
+                    gap: 0.15rem;
+                }
+            }
+        </style>
+    </body>
+</html>
