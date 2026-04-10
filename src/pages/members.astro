@@ -10,14 +10,16 @@ const members = [
 		role: "web",
 		quote: "0xc1ph3rf0x",
 		github: "Ketan-Agarwal",
-		instagram: "ketan__aggarwal"
+		instagram: "ketan__aggarwal",
+		discord: "granteast"
 	},
 	{
 		name: "Ashish Gautam",
 		role: "pwn · reversing",
 		// quote: "Trust nothing. Verify everything.",
-		// github: "janedoe",
-		// twitter: "janedoe",
+		github: "booker-de-witt",
+		instagram: "Coral_AshG",
+		discord: "imajinex"
 	},
 	{
 		name: "Shivam Sah",
@@ -59,6 +61,11 @@ const members = [
 									>
 										gh/{m.github}
 									</a>
+								)}
+								{m.discord && (
+									<span>
+										dc/{m.discord}
+									</span>
 								)}
 								{m.twitter && (
 									<a
@@ -137,10 +144,10 @@ const members = [
 				gap: 1rem;
 				font-size: 12px;
 			}
-			.handles a {
+			.handles a, .handles span {
 				color: var(--fg-dim);
 			}
-			.handles a:hover {
+			.handles a:hover, .handles span:hover{
 				color: var(--accent);
 			}
 

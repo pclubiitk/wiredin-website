@@ -7,69 +7,98 @@ import { SITE_TITLE } from "../consts";
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<BaseHead
-			title={`achievements | ${SITE_TITLE}`}
-			description="WiredIn CTF achievements"
-		/>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>achievements</h1>
-			<p class="desc">Notable results in recent competitions.</p>
+    <head>
+        <BaseHead
+            title={`achievements | ${SITE_TITLE}`}
+            description="WiredIn CTF achievements"
+        />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <h1>achievements</h1>
+            <p class="desc">Notable results in recent competitions.</p>
 
-			<div class="list">
-				<div class="item">
-					<span class="place">8th</span>
-					<span class="event">niteCTF'25</span>
-				</div>
-				<div class="item">
-					<span class="place">24th</span>
-					<span class="event">CSAW CTF'25</span>
-				</div>
-			</div>
-		</main>
-		<Footer />
-		<style>
-			main {
-				max-width: 720px;
-				min-height: 50vh;
-			}
-			h1 {
-				margin-bottom: 0.25rem;
-			}
-			.desc {
-				color: var(--fg-muted);
-				font-size: 13px;
-				margin-bottom: 2rem;
-			}
+            <div class="list">
+                <div class="item">
+                    <div class="rank-box">
+                        <span class="place">8th <small>Global</small></span>
+                        <span class="distinction">1st India</span>
+                    </div>
+                    <span class="event">niteCTF'25</span>
+                </div>
 
-			.list {
-				display: flex;
-				flex-direction: column;
-			}
-			.item {
-				display: flex;
-				align-items: baseline;
-				gap: 1.5rem;
-				padding: 0.6rem 0;
-				border-bottom: 1px solid var(--border);
-				font-size: 14px;
-			}
-			.item:first-child {
-				border-top: 1px solid var(--border);
-			}
-			.place {
-				color: var(--accent);
-				font-weight: 600;
-				min-width: 60px;
-				flex-shrink: 0;
-				font-size: 13px;
-			}
-			.event {
-				color: var(--fg);
-			}
-		</style>
-	</body>
+                <div class="item">
+                    <div class="rank-box">
+                        <span class="place">24th <small>Global</small></span>
+                        <span class="distinction">2nd India</span>
+                    </div>
+                    <span class="event">CSAW CTF'25</span>
+                </div>
+            </div>
+        </main>
+        <Footer />
+        <style>
+            main {
+                max-width: 720px;
+                min-height: 50vh;
+            }
+            h1 {
+                margin-bottom: 0.25rem;
+            }
+            .desc {
+                color: var(--fg-muted);
+                font-size: 13px;
+                margin-bottom: 2rem;
+            }
+
+            .list {
+                display: flex;
+                flex-direction: column;
+            }
+            .item {
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+                padding: 0.8rem 0;
+                border-bottom: 1px solid var(--border);
+                font-size: 14px;
+            }
+            .item:first-child {
+                border-top: 1px solid var(--border);
+            }
+
+            .rank-box {
+                display: flex;
+                flex-direction: column;
+                min-width: 140px;
+                flex-shrink: 0;
+            }
+
+            .place {
+                color: var(--accent);
+                font-weight: 600;
+                font-size: 13px;
+                line-height: 1.2;
+            }
+            
+            .place small {
+                font-weight: 400;
+                font-size: 10px;
+                text-transform: uppercase;
+                opacity: 0.8;
+                margin-left: 2px;
+            }
+
+            .distinction {
+                color: var(--fg-muted);
+                font-size: 11px;
+                font-weight: 500;
+            }
+
+            .event {
+                color: var(--fg);
+            }
+        </style>
+    </body>
 </html>

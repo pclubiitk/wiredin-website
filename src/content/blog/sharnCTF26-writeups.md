@@ -3,6 +3,7 @@ title: 'SHARN CTF26 Official Writeups'
 description: 'Lorem ipsum dolor sit amet'
 pubDate: 'April 9 2026'
 authors: ['WiredIn']
+tags: ["sharn"]
 enableToc: true
 ---
 
