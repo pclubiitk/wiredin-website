@@ -41,12 +41,14 @@ Cryptography is essentially applied number theory. You cannot skip this part if 
 **Practice**: Create an account on **[CryptoHack](https://cryptohack.org)**. Start with the "Modular Arithmetic" section. It is the gold standard for learning this via coding.
 
 ## 3. RSA Mechanics
-This is your first "real" encryption algorithm. It relies on the fact that it is easy to multiply two large prime numbers, but incredibly hard to factor the result back into those primes.
+This is your first "real" encryption algorithm. It relies on the fact that it is easy to multiply two large prime numbers, but incredibly hard to factor the result back into those primes. (Public key — [what??](https://www.youtube.com/watch?v=ERp8420ucGs))
 
 * **Watch**: [This video](https://www.youtube.com/watch?v=JD72Ry60eP4) for a visual breakdown of the math.
 * **Key Components**: Learn what N (modulus), e (public exponent), d (private exponent), p, and q (primes) are. [Read this guide](https://www.geeksforgeeks.org/computer-networks/rsa-algorithm-cryptography/).
 * **New Tool (Factordb)**: If you ever see a small or weak modulus N, check [factordb.com](http://factordb.com/). It is a database of already-factored numbers.
+- Head over to the **[CryptoHack Public Key module](https://cryptohack.org)** and solve at least through the RSA section. It covers all you need for solving most RSA problems.
 * **Coding RSA**: Try to write a Python script that can encrypt and decrypt a message using the RSA formula: c = m^e mod N.
+
 
 ## 4. Modern Horizons (Next Steps)
 Once RSA clicks, the world of modern cryptography opens up. If you are feeling ambitious, look into these:
